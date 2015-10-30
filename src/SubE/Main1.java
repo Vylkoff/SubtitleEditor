@@ -46,7 +46,7 @@ public class Main1 extends JFrame implements ActionListener {
 	public static void main(String[] args) {
 		new Main1();
 	}
-
+//TEST
 	// Menus
 	private JMenu fileMenu;
 	private JMenu editMenu;
