@@ -217,6 +217,7 @@ public class Main1 extends JFrame implements ActionListener {
 		rb1.setEnabled(true);
 		rb2.addActionListener(this);
 		rb2.setEnabled(true);
+
 	}
 
 	private void setTextField() {
@@ -228,11 +229,11 @@ public class Main1 extends JFrame implements ActionListener {
 		cb = new JCheckBox("Delete Tags");
 		cb.addActionListener(this);
 		cb.setEnabled(true);
+
 	}
 
 	private void setButtonRun() {
 		run = new JButton("Run");
-		// run.setPreferredSize(new Dimension(30, 20));
 		run.addActionListener(this);
 		run.setEnabled(true);
 	}
@@ -344,8 +345,9 @@ public class Main1 extends JFrame implements ActionListener {
 		} else if (event.getSource() == cut) {
 			textArea.cut();
 
-		} else if (event.getSource() == rb1) {
-			String line = null;
+		} else if ((event.getSource() == rb1) && (event.getSource() == run)) {
+			String line = textArea.getText();
+
 			// Find closing brace
 			int bracketFromIndex = line.indexOf('}');
 			// Extract 'from' time
@@ -356,7 +358,6 @@ public class Main1 extends JFrame implements ActionListener {
 			int newFromTime = Integer.parseInt(fromTime) + milsec;
 			// Find the following closing brace
 			int bracketToIndex = line.indexOf('}', bracketFromIndex + 1);
-
 			// Extract 'to' time
 			String toTime = line.substring(bracketFromIndex + 2, bracketToIndex);
 			String milisecs1 = tf.getText();
@@ -365,9 +366,31 @@ public class Main1 extends JFrame implements ActionListener {
 			int newToTime = Integer.parseInt(toTime) + milsec1;
 			// Create a new line using the new 'from' and 'to' times
 			String fixedLine = "{" + newFromTime + "}" + "{" + newToTime + "}" + line.substring(bracketToIndex + 1);
-			System.out.println(fixedLine);
-		} else if (event.getSource() == cb) {
 
+			textArea.setText(fixedLine);
+		} else if ((event.getSource() == rb2) && (event.getSource() == run)) {
+			String line = textArea.getText();
+			// Find closing brace
+			int bracketFromIndex = line.indexOf('}');
+			// Extract 'from' time
+			String fromTime = line.substring(1, bracketFromIndex);
+			// Calculate new 'from' time
+			String milisecs = tf.getText();
+			int milsec = Integer.parseInt(milisecs);
+			int newFromTime = Integer.parseInt(fromTime) - milsec;
+			// Find the following closing brace
+			int bracketToIndex = line.indexOf('}', bracketFromIndex + 1);
+			// Extract 'to' time
+			String toTime = line.substring(bracketFromIndex + 2, bracketToIndex);
+			String milisecs1 = tf.getText();
+			int milsec1 = Integer.parseInt(milisecs);
+			// Calculate new 'to' time
+			int newToTime = Integer.parseInt(toTime) - milsec1;
+			// Create a new line using the new 'from' and 'to' times
+			String fixedLine = "{" + newFromTime + "}" + "{" + newToTime + "}" + line.substring(bracketToIndex + 1);
+
+			textArea.setText(fixedLine);
+		} else if (event.getSource() == cb) {
 			String text = textArea.getText();
 			String fixedSubtitles = text.replaceAll("\\<.*?\\>", "");
 			textArea.setText(fixedSubtitles);
