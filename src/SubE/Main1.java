@@ -44,410 +44,403 @@ import javax.xml.soap.Text;
 //@SuppressWarnings("serial")
 public class Main1 extends JFrame implements ActionListener {
 
-public static void main(String[] args) {
-new Main1();
-}
+	public static void main(String[] args) {
+		new Main1();
+	}
 
-/* String[] htmlTags = { "<a>", "<em>", "<strong>", "<cite>", "<q>", "<dfn>",
-"<abbr>", "<data>", "<time>", "<code>", "<var>", "<samp>", "<kbd>",
-"<mark>", "<ruby>", "<rb>", "<rt>", "<rp>", "<rtc>", "<bdi>",
-"<bdo>", "<span>", "<br>", "<wbr>", "<small>", "<i>", "<b>", "<u>",
-"<s>", "<sub>", "<sup>", "<html>", "<head>", "<title>", "<base>",
-"<link>", "<meta>", "<style>", "<body>", "<article>", "<section>",
-"<nav>", "<aside>", "<h1>", "<h2>", "<h3>", "<h4>", "<h5>", "<h6>",
-"<header>", "<footer>", "<address>", "<p>", "<pre>",
-"<blockquote>", "<ol>", "<ul>", "<li>", "<dl>", "<dt>", "<dd>",
-"<figure>", "<figcaption>", "<div>", "<main>", "<hr>", "<ins>",
-"<del>", "<img>", "<embed>", "<object>", "<param>", "<video>",
-"<audio>", "<source>", "<track>", "<map>", "<area>", "<iframe>",
-"<table>", "<tr>", "<td>", "<th>", "<caption>", "<tbody>",
-"<thead>", "<tfoot>", "<colgroup>", "<col>", "<form>", "<input>",
-"<textarea>", "<select>", "<option>", "<optgroup>", "<datalist>",
-"<label>", "<fieldset>", "<legend>", "<button>", "<output>",
-"<progress>", "<meter>", "<keygen>", "<script>", "<noscript>",
-"<template>", "<canvas>", "</a>", "</em>", "</strong>", "</cite>",
-"</q>", "</dfn>", "</abbr>", "</data>", "</time>", "</code>",
-"</var>", "</samp>", "</kbd>", "</mark>", "</ruby>", "</rb>",
-"</rt>", "</rp>", "</rtc>", "</bdi>", "</bdo>", "</span>", "</br>",
-"</wbr>", "</small>", "</i>", "</b>", "</u>", "</s>", "</sub>",
-"</sup>", "</html>", "</head>", "</title>", "</base>", "</link>",
-"</meta>", "</style>", "</body>", "</article>", "</section>",
-"</nav>", "</aside>", "</h1>", "</h2>", "</h3>", "</h4>", "</h5>",
-"</h6>", "</header>", "</footer>", "</address>", "</p>", "</pre>",
-"</blockquote>", "</ol>", "</ul>", "</li>", "</dl>", "</dt>",
-"</dd>", "</figure>", "</figcaption>", "</div>", "</main>",
-"</hr>", "</ins>", "</del>", "</img>", "</embed>", "</object>",
-"</param>", "</video>", "</audio>", "</source>", "</track>",
-"</map>", "</area>", "</iframe>", "</table>", "</tr>", "</td>",
-"</th>", "</caption>", "</tbody>", "</thead>", "</tfoot>",
-"</colgroup>", "</col>", "<form>", "</input>", "</textarea>",
-"</select>", "</option>", "</optgroup>", "</datalist>", "</label>",
-"</fieldset>", "</legend>", "</button>", "</output>",
-"</progress>", "</meter>", "</keygen>", "</script>", "</noscript>",
-"</template>", "</canvas>" }; */
+	/*
+	 * String[] htmlTags = { "<a>", "<em>", "<strong>", "<cite>", "<q>",
+	 * "<dfn>", "<abbr>", "<data>", "<time>", "<code>", "<var>", "<samp>",
+	 * "<kbd>", "<mark>", "<ruby>", "<rb>", "<rt>", "<rp>", "<rtc>", "<bdi>",
+	 * "<bdo>", "<span>", "<br>", "<wbr>", "<small>", "<i>", "<b>", "<u>",
+	 * "<s>", "<sub>", "<sup>", "<html>", "<head>", "<title>", "<base>",
+	 * "<link>", "<meta>", "<style>", "<body>", "<article>", "<section>",
+	 * "<nav>", "<aside>", "<h1>", "<h2>", "<h3>", "<h4>", "<h5>", "<h6>",
+	 * "<header>", "<footer>", "<address>", "<p>", "<pre>", "<blockquote>",
+	 * "<ol>", "<ul>", "<li>", "<dl>", "<dt>", "<dd>", "<figure>",
+	 * "<figcaption>", "<div>", "<main>", "<hr>", "<ins>", "<del>", "<img>",
+	 * "<embed>", "<object>", "<param>", "<video>", "<audio>", "<source>",
+	 * "<track>", "<map>", "<area>", "<iframe>", "<table>", "<tr>", "<td>",
+	 * "<th>", "<caption>", "<tbody>", "<thead>", "<tfoot>", "<colgroup>",
+	 * "<col>", "<form>", "<input>", "<textarea>", "<select>", "<option>",
+	 * "<optgroup>", "<datalist>", "<label>", "<fieldset>", "<legend>",
+	 * "<button>", "<output>", "<progress>", "<meter>", "<keygen>", "<script>",
+	 * "<noscript>", "<template>", "<canvas>", "</a>", "</em>", "</strong>",
+	 * "</cite>", "</q>", "</dfn>", "</abbr>", "</data>", "</time>", "</code>",
+	 * "</var>", "</samp>", "</kbd>", "</mark>", "</ruby>", "</rb>", "</rt>",
+	 * "</rp>", "</rtc>", "</bdi>", "</bdo>", "</span>", "</br>", "</wbr>",
+	 * "</small>", "</i>", "</b>", "</u>", "</s>", "</sub>", "</sup>",
+	 * "</html>", "</head>", "</title>", "</base>", "</link>", "</meta>",
+	 * "</style>", "</body>", "</article>", "</section>", "</nav>", "</aside>",
+	 * "</h1>", "</h2>", "</h3>", "</h4>", "</h5>", "</h6>", "</header>",
+	 * "</footer>", "</address>", "</p>", "</pre>", "</blockquote>", "</ol>",
+	 * "</ul>", "</li>", "</dl>", "</dt>", "</dd>", "</figure>",
+	 * "</figcaption>", "</div>", "</main>", "</hr>", "</ins>", "</del>",
+	 * "</img>", "</embed>", "</object>", "</param>", "</video>", "</audio>",
+	 * "</source>", "</track>", "</map>", "</area>", "</iframe>", "</table>",
+	 * "</tr>", "</td>", "</th>", "</caption>", "</tbody>", "</thead>",
+	 * "</tfoot>", "</colgroup>", "</col>", "<form>", "</input>", "</textarea>",
+	 * "</select>", "</option>", "</optgroup>", "</datalist>", "</label>",
+	 * "</fieldset>", "</legend>", "</button>", "</output>", "</progress>",
+	 * "</meter>", "</keygen>", "</script>", "</noscript>", "</template>",
+	 * "</canvas>" };
+	 */
 
-// Menus
-private JMenu fileMenu;
-private JMenu editMenu;
-private JMenuItem openFile, saveFile, saveAsFile, exit;
-private JMenuItem selectAll, copy, paste, cut;
-private JRadioButton rb1, rb2;
-private JTextField tf;
-private JCheckBox cb;
-private JButton run;
+	// Menus
+	private JMenu fileMenu;
+	private JMenu editMenu;
+	private JMenuItem openFile, saveFile, saveAsFile, exit;
+	private JMenuItem selectAll, copy, paste, cut;
+	private JRadioButton rb1, rb2;
+	private JTextField tf;
+	private JCheckBox cb;
+	private JButton run;
 
-// Window
-private JFrame editorWindow;
+	// Window
+	private JFrame editorWindow;
 
-// Text Area
-private Border textBorder;
-private JScrollPane scroll;
-private JTextArea textArea;
-private Font textFont;
-private Text textContent;
+	// Text Area
+	private Border textBorder;
+	private JScrollPane scroll;
+	private JTextArea textArea;
+	private Font textFont;
+	private Text textContent;
 
-// Window
-private JFrame window;
+	// Window
+	private JFrame window;
 
+	// Is File Saved/Opened
+	private boolean opened = false;
+	private boolean saved = false;
 
-// Is File Saved/Opened
-private boolean opened = false;
-private boolean saved = false;
+	// Record Open File for quick saving
+	private File openedFile;
 
-// Record Open File for quick saving
-private File openedFile;
+	// Undo manager for managing the storage of the undos
+	// so that the can be redone if requested
+	private UndoManager undo;
 
-// Undo manager for managing the storage of the undos
-// so that the can be redone if requested
-private UndoManager undo;
+	// CONSTRUCTOR
 
-// CONSTRUCTOR
+	public Main1() {
 
-public Main1() {
+		// Create Menus
+		fileMenu();
+		editMenu();
+		setRadioButton();
+		setTextField();
+		setCheckBox();
+		setButtonRun();
+		// Create Text Area
+		createTextArea();
 
-// Create Menus
-fileMenu();
-editMenu();
-setRadioButton();
-setTextField();
-setCheckBox();
-setButtonRun();
-// Create Text Area
-createTextArea();
+		// Create Undo Manager for managing undo/redo commands
+		undoMan();
 
-// Create Undo Manager for managing undo/redo commands
-undoMan();
+		// Create Window
+		createEditorWindow();
+	}
 
-// Create Window
-createEditorWindow();
-}
+	private JFrame createEditorWindow() {
+		editorWindow = new JFrame("JavaEdit");
+		editorWindow.setVisible(true);
+		editorWindow.setExtendedState(Frame.MAXIMIZED_BOTH);
+		editorWindow.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-private JFrame createEditorWindow() {
-editorWindow = new JFrame("JavaEdit");
-editorWindow.setVisible(true);
-editorWindow.setExtendedState(Frame.MAXIMIZED_BOTH);
-editorWindow.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		// Create Menu Bar
+		editorWindow.setJMenuBar(createMenuBar());
+		editorWindow.add(scroll, BorderLayout.CENTER);
+		editorWindow.pack();
+		// Centers application on screen
+		editorWindow.setLocationRelativeTo(null);
 
-// Create Menu Bar
-editorWindow.setJMenuBar(createMenuBar());
-editorWindow.add(scroll, BorderLayout.CENTER);
-editorWindow.pack();
-// Centers application on screen
-editorWindow.setLocationRelativeTo(null);
+		return editorWindow;
+	}
 
-return editorWindow;
-}
+	private JTextArea createTextArea() {
+		textBorder = BorderFactory.createBevelBorder(0, Color.BLUE, Color.BLUE);
+		textArea = new JTextArea(30, 50);
+		textArea.setBackground(Color.WHITE);
+		textArea.setEditable(true);
+		textArea.setBorder(BorderFactory.createCompoundBorder(textBorder, BorderFactory.createEmptyBorder(2, 5, 0, 0)));
 
-private JTextArea createTextArea() {
-textBorder = BorderFactory.createBevelBorder(0, Color.BLUE, Color.BLUE);
-textArea = new JTextArea(30, 50);
-textArea.setBackground(Color.WHITE);
-textArea.setEditable(true);
-textArea.setBorder(BorderFactory.createCompoundBorder(textBorder,
-BorderFactory.createEmptyBorder(2, 5, 0, 0)));
+		textFont = new Font("Verdana", 0, 14);
+		textArea.setFont(textFont);
 
-textFont = new Font("Verdana", 0, 14);
-textArea.setFont(textFont);
+		scroll = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
-scroll = new JScrollPane(textArea,
-JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		return textArea;
+	}
 
-return textArea;
-}
+	private JMenuBar createMenuBar() {
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		menuBar.add(fileMenu);
+		menuBar.add(editMenu);
+		menuBar.add(rb1);
+		menuBar.add(rb2);
+		menuBar.add(tf);
+		menuBar.add(cb);
+		menuBar.add(run);
+		return menuBar;
+	}
 
-private JMenuBar createMenuBar() {
-JMenuBar menuBar = new JMenuBar();
-setJMenuBar(menuBar);
-menuBar.add(fileMenu);
-menuBar.add(editMenu);
-menuBar.add(rb1);
-menuBar.add(rb2);
-menuBar.add(tf);
-menuBar.add(cb);
-menuBar.add(run);
-return menuBar;
-}
+	private UndoManager undoMan() {
+		// Listener for undo and redo functions to document
+		undo = new UndoManager();
+		textArea.getDocument().addUndoableEditListener(new UndoableEditListener() {
 
-private UndoManager undoMan() {
-// Listener for undo and redo functions to document
-undo = new UndoManager();
-textArea.getDocument().addUndoableEditListener(
-new UndoableEditListener() {
+			@Override
+			public void undoableEditHappened(UndoableEditEvent e) {
+				undo.addEdit(e.getEdit());
+			}
+		});
 
-@Override
-public void undoableEditHappened(UndoableEditEvent e) {
-undo.addEdit(e.getEdit());
-}
-});
+		return undo;
+	}
 
-return undo;
-}
+	private void fileMenu() {
+		// Create File Menu
+		fileMenu = new JMenu("File");
+		fileMenu.setPreferredSize(new Dimension(40, 20));
 
-private void fileMenu() {
-// Create File Menu
-fileMenu = new JMenu("File");
-fileMenu.setPreferredSize(new Dimension(40, 20));
+		// Add file menu items
 
-// Add file menu items
+		openFile = new JMenuItem("Open...");
+		openFile.addActionListener(this);
+		openFile.setPreferredSize(new Dimension(100, 20));
+		openFile.setEnabled(true);
 
-openFile = new JMenuItem("Open...");
-openFile.addActionListener(this);
-openFile.setPreferredSize(new Dimension(100, 20));
-openFile.setEnabled(true);
+		saveFile = new JMenuItem("Save");
+		saveFile.addActionListener(this);
+		saveFile.setPreferredSize(new Dimension(100, 20));
+		saveFile.setEnabled(true);
 
-saveFile = new JMenuItem("Save");
-saveFile.addActionListener(this);
-saveFile.setPreferredSize(new Dimension(100, 20));
-saveFile.setEnabled(true);
+		saveAsFile = new JMenuItem("Save As...");
+		saveAsFile.addActionListener(this);
+		saveAsFile.setPreferredSize(new Dimension(100, 20));
+		saveAsFile.setEnabled(true);
 
-saveAsFile = new JMenuItem("Save As...");
-saveAsFile.addActionListener(this);
-saveAsFile.setPreferredSize(new Dimension(100, 20));
-saveAsFile.setEnabled(true);
+		exit = new JMenuItem("Exit");
+		exit.addActionListener(this);
+		exit.setPreferredSize(new Dimension(100, 20));
+		exit.setEnabled(true);
 
-exit = new JMenuItem("Exit");
-exit.addActionListener(this);
-exit.setPreferredSize(new Dimension(100, 20));
-exit.setEnabled(true);
+		// Add items to menu
 
-// Add items to menu
+		fileMenu.add(openFile);
+		fileMenu.add(saveFile);
+		fileMenu.add(saveAsFile);
+		fileMenu.add(exit);
+	}
 
-fileMenu.add(openFile);
-fileMenu.add(saveFile);
-fileMenu.add(saveAsFile);
-fileMenu.add(exit);
-}
+	private void editMenu() {
+		editMenu = new JMenu("Edit");
+		editMenu.setPreferredSize(new Dimension(40, 20));
 
-private void editMenu() {
-editMenu = new JMenu("Edit");
-editMenu.setPreferredSize(new Dimension(40, 20));
+		// Add file menu items
+		selectAll = new JMenuItem("Select All");
+		selectAll.addActionListener(this);
+		selectAll.setPreferredSize(new Dimension(100, 20));
+		selectAll.setEnabled(true);
 
-// Add file menu items
-selectAll = new JMenuItem("Select All");
-selectAll.addActionListener(this);
-selectAll.setPreferredSize(new Dimension(100, 20));
-selectAll.setEnabled(true);
+		copy = new JMenuItem("Copy");
+		copy.addActionListener(this);
+		copy.setPreferredSize(new Dimension(100, 20));
+		copy.setEnabled(true);
 
-copy = new JMenuItem("Copy");
-copy.addActionListener(this);
-copy.setPreferredSize(new Dimension(100, 20));
-copy.setEnabled(true);
+		paste = new JMenuItem("Paste");
+		paste.addActionListener(this);
+		paste.setPreferredSize(new Dimension(100, 20));
+		paste.setEnabled(true);
 
-paste = new JMenuItem("Paste");
-paste.addActionListener(this);
-paste.setPreferredSize(new Dimension(100, 20));
-paste.setEnabled(true);
+		cut = new JMenuItem("Cut");
+		cut.addActionListener(this);
+		cut.setPreferredSize(new Dimension(100, 20));
+		cut.setEnabled(true);
 
-cut = new JMenuItem("Cut");
-cut.addActionListener(this);
-cut.setPreferredSize(new Dimension(100, 20));
-cut.setEnabled(true);
+		// Add items to menu
+		editMenu.add(selectAll);
+		editMenu.add(copy);
+		editMenu.add(paste);
+		editMenu.add(cut);
+	}
 
-// Add items to menu
-editMenu.add(selectAll);
-editMenu.add(copy);
-editMenu.add(paste);
-editMenu.add(cut);
-}
+	private void setRadioButton() {
+		ButtonGroup group = new ButtonGroup();
+		rb1 = new JRadioButton("Faster");
+		rb2 = new JRadioButton("Slower");
+		group.add(rb1);
+		group.add(rb2);
+		rb1.addActionListener(this);
+		rb1.setEnabled(true);
+		rb2.addActionListener(this);
+		rb2.setEnabled(true);
+	}
 
-private void setRadioButton() {
-ButtonGroup group = new ButtonGroup();
-rb1 = new JRadioButton("Faster");
-rb2 = new JRadioButton("Slower");
-group.add(rb1);
-group.add(rb2);
-rb1.addActionListener(this);
-rb1.setEnabled(true);
-rb2.addActionListener(this);
-rb2.setEnabled(true);
-}
+	private void setTextField() {
+		tf = new JTextField("ms");
 
-private void setTextField() {
-tf = new JTextField("ms");
+	}
 
-}
+	private void setCheckBox() {
+		cb = new JCheckBox("Delete Tags");
+		cb.addActionListener(this);
+		cb.setEnabled(true);
+	}
 
-private void setCheckBox() {
-cb = new JCheckBox("Delete Tags");
-cb.addActionListener(this);
-cb.setEnabled(true);
-}
-private void setButtonRun(){
-run= new JButton("Run");
-//run.setPreferredSize(new Dimension(30, 20));
-run.addActionListener(this);
-run.setEnabled(true);
-}
+	private void setButtonRun() {
+		run = new JButton("Run");
+		// run.setPreferredSize(new Dimension(30, 20));
+		run.addActionListener(this);
+		run.setEnabled(true);
+	}
 
-// Method for saving files - Removes duplication of code
-private void saveFile(File filename) {
-try {
-BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
-writer.write(textArea.getText());
-writer.close();
-saved = true;
-window.setTitle("JavaText - " + filename.getName());
-} catch (IOException err) {
-err.printStackTrace();
-}
-}
+	// Method for saving files - Removes duplication of code
+	private void saveFile(File filename) {
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
+			writer.write(textArea.getText());
+			writer.close();
+			saved = true;
+			window.setTitle("JavaText - " + filename.getName());
+		} catch (IOException err) {
+			err.printStackTrace();
+		}
+	}
 
-// Method for quick saving files
-private void quickSave(File filename) {
-try {
-BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
-writer.write(textArea.getText());
-writer.close();
-} catch (IOException err) {
-err.printStackTrace();
-}
-}
+	// Method for quick saving files
+	private void quickSave(File filename) {
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
+			writer.write(textArea.getText());
+			writer.close();
+		} catch (IOException err) {
+			err.printStackTrace();
+		}
+	}
 
-// Method for opening files
-private void openingFiles(File filename) {
-try {
-openedFile = filename;
-FileReader reader = new FileReader(filename);
-textArea.read(reader, null);
-opened = true;
-window.setTitle("JavaEdit - " + filename.getName());
-} catch (IOException err) {
-err.printStackTrace();
-}
-// JFileChooser fs=new JFileChooser(new File("c:\\"));
-// fs.setDialogTitle("Open a File");
-// fs.setFileFilter(new FileTypeFilter(".sub","Sub file"));
-// fs.setFileFilter(new FileTypeFilter(".srt","Srt file"));
-// int result=fs.showOpenDialog(null);
-// if(result==JFileChooser.APPROVE_OPTION){
-// try{
-// File fi =fs.getSelectedFile();
-// BufferedReader br=new BufferedReader(new FileReader(fi.getPath()));
-// String line="";
-// String s="";
-// AbstractButton textContent = null;
-// textContent.setText(s);
-// if (br!=null)
-// br.close();
-// }catch(Exception e2){
-// JOptionPane.showMessageDialog(null,e2.getMessage());
-// }
-// }
-}
+	// Method for opening files
+	private void openingFiles(File filename) {
+		try {
+			openedFile = filename;
+			FileReader reader = new FileReader(filename);
+			textArea.read(reader, null);
+			opened = true;
+			window.setTitle("JavaEdit - " + filename.getName());
+		} catch (IOException err) {
+			err.printStackTrace();
+		}
+		// JFileChooser fs=new JFileChooser(new File("c:\\"));
+		// fs.setDialogTitle("Open a File");
+		// fs.setFileFilter(new FileTypeFilter(".sub","Sub file"));
+		// fs.setFileFilter(new FileTypeFilter(".srt","Srt file"));
+		// int result=fs.showOpenDialog(null);
+		// if(result==JFileChooser.APPROVE_OPTION){
+		// try{
+		// File fi =fs.getSelectedFile();
+		// BufferedReader br=new BufferedReader(new FileReader(fi.getPath()));
+		// String line="";
+		// String s="";
+		// AbstractButton textContent = null;
+		// textContent.setText(s);
+		// if (br!=null)
+		// br.close();
+		// }catch(Exception e2){
+		// JOptionPane.showMessageDialog(null,e2.getMessage());
+		// }
+		// }
+	}
 
-@Override
-public void actionPerformed(ActionEvent event) {
+	@Override
+	public void actionPerformed(ActionEvent event) {
 
-if (event.getSource() == openFile) {
-JFileChooser open = new JFileChooser();
-open.showOpenDialog(null);
-File file = open.getSelectedFile();
-openingFiles(file);
+		if (event.getSource() == openFile) {
+			JFileChooser open = new JFileChooser();
+			open.showOpenDialog(null);
+			File file = open.getSelectedFile();
+			openingFiles(file);
 
-} else if (event.getSource() == saveFile) {
-JFileChooser save = new JFileChooser();
-File filename = save.getSelectedFile();
-if (opened == false && saved == false) {
-save.showSaveDialog(null);
-int confirmationResult;
-if (filename.exists()) {
-confirmationResult = JOptionPane.showConfirmDialog(
-saveFile, "Replace existing file?");
-if (confirmationResult == JOptionPane.YES_OPTION) {
-saveFile(filename);
-}
-} else {
-saveFile(filename);
-}
-} else {
-quickSave(openedFile);
-}
-} else if (event.getSource() == saveAsFile) {
-JFileChooser saveAs = new JFileChooser();
-saveAs.showSaveDialog(null);
-File filename = saveAs.getSelectedFile();
-int confirmationResult;
-if (filename.exists()) {
-confirmationResult = JOptionPane.showConfirmDialog(saveAsFile,
-"Replace existing file?");
-if (confirmationResult == JOptionPane.YES_OPTION) {
-saveFile(filename);
-}
-} else {
-saveFile(filename);
-}
+		} else if (event.getSource() == saveFile) {
+			JFileChooser save = new JFileChooser();
+			File filename = save.getSelectedFile();
+			if (opened == false && saved == false) {
+				save.showSaveDialog(null);
+				int confirmationResult;
+				if (filename.exists()) {
+					confirmationResult = JOptionPane.showConfirmDialog(saveFile, "Replace existing file?");
+					if (confirmationResult == JOptionPane.YES_OPTION) {
+						saveFile(filename);
+					}
+				} else {
+					saveFile(filename);
+				}
+			} else {
+				quickSave(openedFile);
+			}
+		} else if (event.getSource() == saveAsFile) {
+			JFileChooser saveAs = new JFileChooser();
+			saveAs.showSaveDialog(null);
+			File filename = saveAs.getSelectedFile();
+			int confirmationResult;
+			if (filename.exists()) {
+				confirmationResult = JOptionPane.showConfirmDialog(saveAsFile, "Replace existing file?");
+				if (confirmationResult == JOptionPane.YES_OPTION) {
+					saveFile(filename);
+				}
+			} else {
+				saveFile(filename);
+			}
 
-} else if (event.getSource() == exit) {
-System.exit(0);
-} else if (event.getSource() == selectAll) {
-textArea.selectAll();
-} else if (event.getSource() == copy) {
-textArea.copy();
-} else if (event.getSource() == paste) {
-textArea.paste();
-} else if (event.getSource() == cut) {
-textArea.cut();
+		} else if (event.getSource() == exit) {
+			System.exit(0);
+		} else if (event.getSource() == selectAll) {
+			textArea.selectAll();
+		} else if (event.getSource() == copy) {
+			textArea.copy();
+		} else if (event.getSource() == paste) {
+			textArea.paste();
+		} else if (event.getSource() == cut) {
+			textArea.cut();
 
-} else if (event.getSource() == rb1) {
-String line = null;
-// Find closing brace
-int bracketFromIndex = line.indexOf('}');
-// Extract 'from' time
-String fromTime = line.substring(1, bracketFromIndex);
-// Calculate new 'from' time
-String milisecs = tf.getText();
-int milsec = Integer.parseInt(milisecs);
-int newFromTime = Integer.parseInt(fromTime) + milsec;
-// Find the following closing brace
-int bracketToIndex = line.indexOf('}', bracketFromIndex + 1);
+		} else if (event.getSource() == rb1) {
+			String line = null;
+			// Find closing brace
+			int bracketFromIndex = line.indexOf('}');
+			// Extract 'from' time
+			String fromTime = line.substring(1, bracketFromIndex);
+			// Calculate new 'from' time
+			String milisecs = tf.getText();
+			int milsec = Integer.parseInt(milisecs);
+			int newFromTime = Integer.parseInt(fromTime) + milsec;
+			// Find the following closing brace
+			int bracketToIndex = line.indexOf('}', bracketFromIndex + 1);
 
-// Extract 'to' time
-String toTime = line
-.substring(bracketFromIndex + 2, bracketToIndex);
-String milisecs1 = tf.getText();
-int milsec1 = Integer.parseInt(milisecs);
-// Calculate new 'to' time
-int newToTime = Integer.parseInt(toTime) + milsec1;
-// Create a new line using the new 'from' and 'to' times
-String fixedLine = "{" + newFromTime + "}" + "{" + newToTime + "}"
-+ line.substring(bracketToIndex + 1);
-System.out.println(fixedLine);
-}else if (event.getSource() == cb){
+			// Extract 'to' time
+			String toTime = line.substring(bracketFromIndex + 2, bracketToIndex);
+			String milisecs1 = tf.getText();
+			int milsec1 = Integer.parseInt(milisecs);
+			// Calculate new 'to' time
+			int newToTime = Integer.parseInt(toTime) + milsec1;
+			// Create a new line using the new 'from' and 'to' times
+			String fixedLine = "{" + newFromTime + "}" + "{" + newToTime + "}" + line.substring(bracketToIndex + 1);
+			System.out.println(fixedLine);
+		} else if (event.getSource() == cb) {
 
-String text=textArea.getText();
-String fixedSubtitles=text.replaceAll("\\<.*?\\>","");
-System.out.println(fixedSubtitles);
-}
-}
+			String text = textArea.getText();
+			String fixedSubtitles = text.replaceAll("\\<.*?\\>", "");
+			textArea.setText(fixedSubtitles);
+		}
+	}
 
-// GETTERS AND SETTERS
+	// GETTERS AND SETTERS
 
-public JTextArea getTextArea() {
-return textArea;
-}
+	public JTextArea getTextArea() {
+		return textArea;
+	}
 
-public void setTextArea(JTextArea text) {
-textArea = text;
-}
+	public void setTextArea(JTextArea text) {
+		textArea = text;
+	}
 }
