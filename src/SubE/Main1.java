@@ -41,50 +41,11 @@ import javax.swing.undo.CannotUndoException;
 import javax.swing.undo.UndoManager;
 import javax.xml.soap.Text;
 
-//@SuppressWarnings("serial")
 public class Main1 extends JFrame implements ActionListener {
 
 	public static void main(String[] args) {
 		new Main1();
 	}
-
-	/*
-	 * String[] htmlTags = { "<a>", "<em>", "<strong>", "<cite>", "<q>",
-	 * "<dfn>", "<abbr>", "<data>", "<time>", "<code>", "<var>", "<samp>",
-	 * "<kbd>", "<mark>", "<ruby>", "<rb>", "<rt>", "<rp>", "<rtc>", "<bdi>",
-	 * "<bdo>", "<span>", "<br>", "<wbr>", "<small>", "<i>", "<b>", "<u>",
-	 * "<s>", "<sub>", "<sup>", "<html>", "<head>", "<title>", "<base>",
-	 * "<link>", "<meta>", "<style>", "<body>", "<article>", "<section>",
-	 * "<nav>", "<aside>", "<h1>", "<h2>", "<h3>", "<h4>", "<h5>", "<h6>",
-	 * "<header>", "<footer>", "<address>", "<p>", "<pre>", "<blockquote>",
-	 * "<ol>", "<ul>", "<li>", "<dl>", "<dt>", "<dd>", "<figure>",
-	 * "<figcaption>", "<div>", "<main>", "<hr>", "<ins>", "<del>", "<img>",
-	 * "<embed>", "<object>", "<param>", "<video>", "<audio>", "<source>",
-	 * "<track>", "<map>", "<area>", "<iframe>", "<table>", "<tr>", "<td>",
-	 * "<th>", "<caption>", "<tbody>", "<thead>", "<tfoot>", "<colgroup>",
-	 * "<col>", "<form>", "<input>", "<textarea>", "<select>", "<option>",
-	 * "<optgroup>", "<datalist>", "<label>", "<fieldset>", "<legend>",
-	 * "<button>", "<output>", "<progress>", "<meter>", "<keygen>", "<script>",
-	 * "<noscript>", "<template>", "<canvas>", "</a>", "</em>", "</strong>",
-	 * "</cite>", "</q>", "</dfn>", "</abbr>", "</data>", "</time>", "</code>",
-	 * "</var>", "</samp>", "</kbd>", "</mark>", "</ruby>", "</rb>", "</rt>",
-	 * "</rp>", "</rtc>", "</bdi>", "</bdo>", "</span>", "</br>", "</wbr>",
-	 * "</small>", "</i>", "</b>", "</u>", "</s>", "</sub>", "</sup>",
-	 * "</html>", "</head>", "</title>", "</base>", "</link>", "</meta>",
-	 * "</style>", "</body>", "</article>", "</section>", "</nav>", "</aside>",
-	 * "</h1>", "</h2>", "</h3>", "</h4>", "</h5>", "</h6>", "</header>",
-	 * "</footer>", "</address>", "</p>", "</pre>", "</blockquote>", "</ol>",
-	 * "</ul>", "</li>", "</dl>", "</dt>", "</dd>", "</figure>",
-	 * "</figcaption>", "</div>", "</main>", "</hr>", "</ins>", "</del>",
-	 * "</img>", "</embed>", "</object>", "</param>", "</video>", "</audio>",
-	 * "</source>", "</track>", "</map>", "</area>", "</iframe>", "</table>",
-	 * "</tr>", "</td>", "</th>", "</caption>", "</tbody>", "</thead>",
-	 * "</tfoot>", "</colgroup>", "</col>", "<form>", "</input>", "</textarea>",
-	 * "</select>", "</option>", "</optgroup>", "</datalist>", "</label>",
-	 * "</fieldset>", "</legend>", "</button>", "</output>", "</progress>",
-	 * "</meter>", "</keygen>", "</script>", "</noscript>", "</template>",
-	 * "</canvas>" };
-	 */
 
 	// Menus
 	private JMenu fileMenu;
@@ -116,10 +77,6 @@ public class Main1 extends JFrame implements ActionListener {
 	// Record Open File for quick saving
 	private File openedFile;
 
-	// Undo manager for managing the storage of the undos
-	// so that the can be redone if requested
-	private UndoManager undo;
-
 	// CONSTRUCTOR
 
 	public Main1() {
@@ -133,9 +90,6 @@ public class Main1 extends JFrame implements ActionListener {
 		setButtonRun();
 		// Create Text Area
 		createTextArea();
-
-		// Create Undo Manager for managing undo/redo commands
-		undoMan();
 
 		// Create Window
 		createEditorWindow();
@@ -184,20 +138,6 @@ public class Main1 extends JFrame implements ActionListener {
 		menuBar.add(cb);
 		menuBar.add(run);
 		return menuBar;
-	}
-
-	private UndoManager undoMan() {
-		// Listener for undo and redo functions to document
-		undo = new UndoManager();
-		textArea.getDocument().addUndoableEditListener(new UndoableEditListener() {
-
-			@Override
-			public void undoableEditHappened(UndoableEditEvent e) {
-				undo.addEdit(e.getEdit());
-			}
-		});
-
-		return undo;
 	}
 
 	private void fileMenu() {
