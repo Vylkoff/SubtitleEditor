@@ -45,15 +45,15 @@ import javax.swing.undo.UndoManager;
 import javax.xml.soap.Text;
 
 public class Main1 extends JFrame implements ActionListener {
-	  private static final String OUTPUT_FILE = "fixed.sub";
-	  private static String line;
+	private static final String OUTPUT_FILE = "fixed.sub";
+	private static String line;
+
 	public static void main(String[] args) {
-		  
-	
+
 		new Main1();
 	}
 
-	//TEST
+	// TEST
 	// Menus
 	private JMenu fileMenu;
 	private JMenu editMenu;
@@ -100,7 +100,7 @@ public class Main1 extends JFrame implements ActionListener {
 
 		// Create Window
 		createEditorWindow();
-		
+
 	}
 
 	private JFrame createEditorWindow() {
@@ -124,12 +124,14 @@ public class Main1 extends JFrame implements ActionListener {
 		textArea = new JTextArea(30, 50);
 		textArea.setBackground(Color.WHITE);
 		textArea.setEditable(true);
-		textArea.setBorder(BorderFactory.createCompoundBorder(textBorder, BorderFactory.createEmptyBorder(2, 5, 0, 0)));
+		textArea.setBorder(BorderFactory.createCompoundBorder(textBorder,
+				BorderFactory.createEmptyBorder(2, 5, 0, 0)));
 
 		textFont = new Font("Verdana", 0, 14);
 		textArea.setFont(textFont);
 
-		scroll = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+		scroll = new JScrollPane(textArea,
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
 		return textArea;
@@ -318,7 +320,8 @@ public class Main1 extends JFrame implements ActionListener {
 				save.showSaveDialog(null);
 				int confirmationResult;
 				if (filename.exists()) {
-					confirmationResult = JOptionPane.showConfirmDialog(saveFile, "Replace existing file?");
+					confirmationResult = JOptionPane.showConfirmDialog(
+							saveFile, "Replace existing file?");
 					if (confirmationResult == JOptionPane.YES_OPTION) {
 						saveFile(filename);
 					}
@@ -334,7 +337,8 @@ public class Main1 extends JFrame implements ActionListener {
 			File filename = saveAs.getSelectedFile();
 			int confirmationResult;
 			if (filename.exists()) {
-				confirmationResult = JOptionPane.showConfirmDialog(saveAsFile, "Replace existing file?");
+				confirmationResult = JOptionPane.showConfirmDialog(saveAsFile,
+						"Replace existing file?");
 				if (confirmationResult == JOptionPane.YES_OPTION) {
 					saveFile(filename);
 				}
@@ -353,92 +357,120 @@ public class Main1 extends JFrame implements ActionListener {
 		} else if (event.getSource() == cut) {
 			textArea.cut();
 
-		} else if  (rb1.isSelected() && (event.getSource() == run)){
+		} else if (rb1.isSelected() && (event.getSource() == run)) {
 			Scanner fileInput = null;
-	        PrintStream fileOutput = null;
-	        try {
-	         // Create scanner with the Cyrillic encoding
-	        	
-	           fileInput = new Scanner(
-	               new File("proba.txt", "UTF-8"));
-	        	
-	        	
-	            // Create PrintWriter with the Cyrillic encoding
-	            fileOutput = new PrintStream(
-	                "textArea.setText()", "UTF-8");
-	          //  String line;
-	            while (fileInput.hasNextLine()) {
-	                line = fileInput.nextLine();
-	                String fixedLine = fixLine(line);
-	                fileOutput.println(fixedLine);
-	            }
-	        } catch (FileNotFoundException fnfe) {
-	            System.err.println(fnfe.getMessage());
-	        } catch (UnsupportedEncodingException uee) {
-	            System.err.println(uee.getMessage());
-	        } finally {
-	            if (null != fileInput) {
-	               fileInput.close();
-	            }
-	            if (null != fileOutput) {
-	                fileOutput.close();
-	            }
-	        }
-			//fixLine(line);
-			
-			
-			
-		} else if ((event.getSource() == rb2) && (event.getSource() == run)) {
-			String line = textArea.getText();
-			// Find closing brace
-			int bracketFromIndex = line.indexOf('}');
-			// Extract 'from' time
-			String fromTime = line.substring(1, bracketFromIndex);
-			// Calculate new 'from' time
-			String milisecs = tf.getText();
-			int milsec = Integer.parseInt(milisecs);
-			int newFromTime = Integer.parseInt(fromTime) - milsec;
-			// Find the following closing brace
-			int bracketToIndex = line.indexOf('}', bracketFromIndex + 1);
-			// Extract 'to' time
-			String toTime = line.substring(bracketFromIndex + 2, bracketToIndex);
-			String milisecs1 = tf.getText();
-			int milsec1 = Integer.parseInt(milisecs);
-			// Calculate new 'to' time
-			int newToTime = Integer.parseInt(toTime) - milsec1;
-			// Create a new line using the new 'from' and 'to' times
-			String fixedLine = "{" + newFromTime + "}" + "{" + newToTime + "}" + line.substring(bracketToIndex + 1);
+			PrintStream fileOutput = null;
+			try {
+				// Create scanner with the Cyrillic encoding
 
-			textArea.setText(fixedLine);
+				fileInput = new Scanner(new File("proba.txt", "UTF-8"));
+
+				// Create PrintWriter with the Cyrillic encoding
+				fileOutput = new PrintStream("OUTPUT_FILE)", "UTF-8");
+				// String line;
+				while (fileInput.hasNextLine()) {
+					line = fileInput.nextLine();
+					String fixedLine = fixSubtitleFaster(line);
+					fileOutput.println(fixedLine);
+				}
+			} catch (FileNotFoundException fnfe) {
+				System.err.println(fnfe.getMessage());
+			} catch (UnsupportedEncodingException uee) {
+				System.err.println(uee.getMessage());
+			} finally {
+				if (null != fileInput) {
+					fileInput.close();
+				}
+				if (null != fileOutput) {
+					fileOutput.close();
+				}
+			}
+			// fixLine(line);
+
+		} else if (rb2.isSelected() && (event.getSource() == run)) {
+			Scanner fileInput = null;
+			PrintStream fileOutput = null;
+			try {
+				// Create scanner with the Cyrillic encoding
+
+				fileInput = new Scanner(new File("proba.txt", "UTF-8"));
+
+				// Create PrintWriter with the Cyrillic encoding
+				fileOutput = new PrintStream("OUTPUT_FILE", "UTF-8");
+				// String line;
+				while (fileInput.hasNextLine()) {
+					line = fileInput.nextLine();
+					String fixedLine = fixSubtitleSlower(line);
+					fileOutput.println(fixedLine);
+				}
+			} catch (FileNotFoundException fnfe) {
+				System.err.println(fnfe.getMessage());
+			} catch (UnsupportedEncodingException uee) {
+				System.err.println(uee.getMessage());
+			} finally {
+				if (null != fileInput) {
+					fileInput.close();
+				}
+				if (null != fileOutput) {
+					fileOutput.close();
+				}
+			}
+
+			// textArea.setText(fixedLine);
 		} else if (event.getSource() == cb) {
 			String text = textArea.getText();
 			String fixedSubtitles = text.replaceAll("\\<.*?\\>", "");
 			textArea.setText(fixedSubtitles);
 		}
 	}
-	private static   String fixLine(String line) {
+
+	private static String fixSubtitleFaster(String line) {
 		// Find closing brace
-					int bracketFromIndex = line.indexOf('}');
-					// Extract 'from' time
-					String fromTime = line.substring(1, bracketFromIndex);
-					// Calculate new 'from' time
-					String milisecs = tf.getText();
-					int milsec = Integer.parseInt(milisecs);
-					int newFromTime = Integer.parseInt(fromTime) + milsec;
-					
-					// Find the following closing brace
-					int bracketToIndex = line.indexOf('}', bracketFromIndex + 1);
-					// Extract 'to' time
-					String toTime = line.substring(bracketFromIndex + 2, bracketToIndex);
-					String milisecs1 = tf.getText();
-					int milsec1 = Integer.parseInt(milisecs);
-					// Calculate new 'to' time
-					int newToTime = Integer.parseInt(toTime) + milsec1;
-					// Create a new line using the new 'from' and 'to' times
-					String fixedLine = "{" + newFromTime + "}" + "{" + newToTime + "}" + line.substring(bracketToIndex + 1);
-					//textArea.setText(fixedLine);
-					return fixedLine;
-		}
+		int bracketFromIndex = line.indexOf('}');
+		// Extract 'from' time
+		String fromTime = line.substring(1, bracketFromIndex);
+		// Calculate new 'from' time
+		String milisecs = tf.getText();
+		int milsec = Integer.parseInt(milisecs);
+		int newFromTime = Integer.parseInt(fromTime) + milsec;
+
+		// Find the following closing brace
+		int bracketToIndex = line.indexOf('}', bracketFromIndex + 1);
+		// Extract 'to' time
+		String toTime = line.substring(bracketFromIndex + 2, bracketToIndex);
+		String milisecs1 = tf.getText();
+		int milsec1 = Integer.parseInt(milisecs);
+		// Calculate new 'to' time
+		int newToTime = Integer.parseInt(toTime) + milsec1;
+		// Create a new line using the new 'from' and 'to' times
+		String fixedLine = "{" + newFromTime + "}" + "{" + newToTime + "}"
+				+ line.substring(bracketToIndex + 1);
+		// textArea.setText(fixedLine);
+		return fixedLine;
+	}
+
+	private static String fixSubtitleSlower(String line) {
+		// Find closing brace
+		int bracketFromIndex = line.indexOf('}');
+		// Extract 'from' time
+		String fromTime = line.substring(1, bracketFromIndex);
+		// Calculate new 'from' time
+		String milisecs = tf.getText();
+		int milsec = Integer.parseInt(milisecs);
+		int newFromTime = Integer.parseInt(fromTime) - milsec;
+		// Find the following closing brace
+		int bracketToIndex = line.indexOf('}', bracketFromIndex + 1);
+		// Extract 'to' time
+		String toTime = line.substring(bracketFromIndex + 2, bracketToIndex);
+		String milisecs1 = tf.getText();
+		int milsec1 = Integer.parseInt(milisecs);
+		// Calculate new 'to' time
+		int newToTime = Integer.parseInt(toTime) - milsec1;
+		// Create a new line using the new 'from' and 'to' times
+		String fixedLine = "{" + newFromTime + "}" + "{" + newToTime + "}"
+				+ line.substring(bracketToIndex + 1);
+		return fixedLine;
+	}
 
 	// GETTERS AND SETTERS
 
