@@ -339,7 +339,7 @@ public class Main1 extends JFrame implements ActionListener {
 			try {
 				// Create scanner with the Cyrillic encoding
 
-				fileInput = new Scanner(new File("proba.txt", "UTF-8"));
+				fileInput = new Scanner(new File("Subtitles.sub", "UTF-8"));
 
 				// Create PrintWriter with the Cyrillic encoding
 				fileOutput = new PrintStream("OUTPUT_FILE", "UTF-8");
