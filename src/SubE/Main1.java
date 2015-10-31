@@ -59,10 +59,10 @@ public class Main1 extends JFrame implements ActionListener {
 	private JMenu editMenu;
 	private JMenuItem openFile, saveFile, saveAsFile, exit;
 	private JMenuItem selectAll, copy, paste, cut;
-	private JRadioButton rb1, rb2;
-	private static JTextField tf;
-	private JCheckBox cb;
-	private JButton run;
+	private JRadioButton radioButtonFaster, radioButtonSlower;
+	private static JTextField textField;
+	private JCheckBox checkBox;
+	private JButton buttonRun;
 
 	// Window
 	private JFrame editorWindow;
@@ -124,14 +124,12 @@ public class Main1 extends JFrame implements ActionListener {
 		textArea = new JTextArea(30, 50);
 		textArea.setBackground(Color.WHITE);
 		textArea.setEditable(true);
-		textArea.setBorder(BorderFactory.createCompoundBorder(textBorder,
-				BorderFactory.createEmptyBorder(2, 5, 0, 0)));
+		textArea.setBorder(BorderFactory.createCompoundBorder(textBorder, BorderFactory.createEmptyBorder(2, 5, 0, 0)));
 
 		textFont = new Font("Verdana", 0, 14);
 		textArea.setFont(textFont);
 
-		scroll = new JScrollPane(textArea,
-				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+		scroll = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
 		return textArea;
@@ -142,11 +140,11 @@ public class Main1 extends JFrame implements ActionListener {
 		setJMenuBar(menuBar);
 		menuBar.add(fileMenu);
 		menuBar.add(editMenu);
-		menuBar.add(rb1);
-		menuBar.add(rb2);
-		menuBar.add(tf);
-		menuBar.add(cb);
-		menuBar.add(run);
+		menuBar.add(radioButtonFaster);
+		menuBar.add(radioButtonSlower);
+		menuBar.add(textField);
+		menuBar.add(checkBox);
+		menuBar.add(buttonRun);
 		return menuBar;
 	}
 
@@ -219,33 +217,33 @@ public class Main1 extends JFrame implements ActionListener {
 
 	private void setRadioButton() {
 		ButtonGroup group = new ButtonGroup();
-		rb1 = new JRadioButton("Faster");
-		rb2 = new JRadioButton("Slower");
-		group.add(rb1);
-		group.add(rb2);
-		rb1.addActionListener(this);
-		rb1.setEnabled(true);
-		rb2.addActionListener(this);
-		rb2.setEnabled(true);
+		radioButtonFaster = new JRadioButton("Faster");
+		radioButtonSlower = new JRadioButton("Slower");
+		group.add(radioButtonFaster);
+		group.add(radioButtonSlower);
+		radioButtonFaster.addActionListener(this);
+		radioButtonFaster.setEnabled(true);
+		radioButtonSlower.addActionListener(this);
+		radioButtonSlower.setEnabled(true);
 
 	}
 
 	private void setTextField() {
-		tf = new JTextField("ms");
+		textField = new JTextField("ms");
 
 	}
 
 	private void setCheckBox() {
-		cb = new JCheckBox("Delete Tags");
-		cb.addActionListener(this);
-		cb.setEnabled(true);
+		checkBox = new JCheckBox("Delete Tags");
+		checkBox.addActionListener(this);
+		checkBox.setEnabled(true);
 
 	}
 
 	private void setButtonRun() {
-		run = new JButton("Run");
-		run.addActionListener(this);
-		run.setEnabled(true);
+		buttonRun = new JButton("Run");
+		buttonRun.addActionListener(this);
+		buttonRun.setEnabled(true);
 	}
 
 	// Method for saving files - Removes duplication of code
@@ -283,25 +281,7 @@ public class Main1 extends JFrame implements ActionListener {
 		} catch (IOException err) {
 			err.printStackTrace();
 		}
-		// JFileChooser fs=new JFileChooser(new File("c:\\"));
-		// fs.setDialogTitle("Open a File");
-		// fs.setFileFilter(new FileTypeFilter(".sub","Sub file"));
-		// fs.setFileFilter(new FileTypeFilter(".srt","Srt file"));
-		// int result=fs.showOpenDialog(null);
-		// if(result==JFileChooser.APPROVE_OPTION){
-		// try{
-		// File fi =fs.getSelectedFile();
-		// BufferedReader br=new BufferedReader(new FileReader(fi.getPath()));
-		// String line="";
-		// String s="";
-		// AbstractButton textContent = null;
-		// textContent.setText(s);
-		// if (br!=null)
-		// br.close();
-		// }catch(Exception e2){
-		// JOptionPane.showMessageDialog(null,e2.getMessage());
-		// }
-		// }
+		
 	}
 
 	@Override
@@ -324,7 +304,7 @@ public class Main1 extends JFrame implements ActionListener {
 		} else if (event.getSource() == cut) {
 			textArea.cut();
 
-		} else if (rb1.isSelected() && (event.getSource() == run)) {
+		} else if (radioButtonFaster.isSelected() && (event.getSource() == buttonRun)) {
 			Scanner fileInput = null;
 			PrintStream fileOutput = null;
 			try {
@@ -352,9 +332,8 @@ public class Main1 extends JFrame implements ActionListener {
 					fileOutput.close();
 				}
 			}
-			// fixLine(line);
 
-		} else if (rb2.isSelected() && (event.getSource() == run)) {
+		} else if (radioButtonSlower.isSelected() && (event.getSource() == buttonRun)) {
 			Scanner fileInput = null;
 			PrintStream fileOutput = null;
 			try {
@@ -384,7 +363,7 @@ public class Main1 extends JFrame implements ActionListener {
 			}
 
 			// textArea.setText(fixedLine);
-		} else if (event.getSource() == cb) {
+		} else if (event.getSource() == checkBox) {
 			String text = textArea.getText();
 			String fixedSubtitles = text.replaceAll("\\<.*?\\>", "");
 			textArea.setText(fixedSubtitles);
@@ -405,8 +384,7 @@ public class Main1 extends JFrame implements ActionListener {
 			save.showSaveDialog(null);
 			int confirmationResult;
 			if (filename.exists()) {
-				confirmationResult = JOptionPane.showConfirmDialog(saveFile,
-						"Replace existing file?");
+				confirmationResult = JOptionPane.showConfirmDialog(saveFile, "Replace existing file?");
 				if (confirmationResult == JOptionPane.YES_OPTION) {
 					saveFile(filename);
 				}
@@ -424,8 +402,7 @@ public class Main1 extends JFrame implements ActionListener {
 		File filename = saveAs.getSelectedFile();
 		int confirmationResult;
 		if (filename.exists()) {
-			confirmationResult = JOptionPane.showConfirmDialog(saveAsFile,
-					"Replace existing file?");
+			confirmationResult = JOptionPane.showConfirmDialog(saveAsFile, "Replace existing file?");
 			if (confirmationResult == JOptionPane.YES_OPTION) {
 				saveFile(filename);
 			}
@@ -440,7 +417,7 @@ public class Main1 extends JFrame implements ActionListener {
 		// Extract 'from' time
 		String fromTime = line.substring(1, bracketFromIndex);
 		// Calculate new 'from' time
-		String milisecs = tf.getText();
+		String milisecs = textField.getText();
 		int milsec = Integer.parseInt(milisecs);
 		int newFromTime = Integer.parseInt(fromTime) + milsec;
 
@@ -448,13 +425,12 @@ public class Main1 extends JFrame implements ActionListener {
 		int bracketToIndex = line.indexOf('}', bracketFromIndex + 1);
 		// Extract 'to' time
 		String toTime = line.substring(bracketFromIndex + 2, bracketToIndex);
-		String milisecs1 = tf.getText();
+		String milisecs1 = textField.getText();
 		int milsec1 = Integer.parseInt(milisecs);
 		// Calculate new 'to' time
 		int newToTime = Integer.parseInt(toTime) + milsec1;
 		// Create a new line using the new 'from' and 'to' times
-		String fixedLine = "{" + newFromTime + "}" + "{" + newToTime + "}"
-				+ line.substring(bracketToIndex + 1);
+		String fixedLine = "{" + newFromTime + "}" + "{" + newToTime + "}" + line.substring(bracketToIndex + 1);
 		// textArea.setText(fixedLine);
 		return fixedLine;
 	}
@@ -465,20 +441,19 @@ public class Main1 extends JFrame implements ActionListener {
 		// Extract 'from' time
 		String fromTime = line.substring(1, bracketFromIndex);
 		// Calculate new 'from' time
-		String milisecs = tf.getText();
+		String milisecs = textField.getText();
 		int milsec = Integer.parseInt(milisecs);
 		int newFromTime = Integer.parseInt(fromTime) - milsec;
 		// Find the following closing brace
 		int bracketToIndex = line.indexOf('}', bracketFromIndex + 1);
 		// Extract 'to' time
 		String toTime = line.substring(bracketFromIndex + 2, bracketToIndex);
-		String milisecs1 = tf.getText();
+		String milisecs1 = textField.getText();
 		int milsec1 = Integer.parseInt(milisecs);
 		// Calculate new 'to' time
 		int newToTime = Integer.parseInt(toTime) - milsec1;
 		// Create a new line using the new 'from' and 'to' times
-		String fixedLine = "{" + newFromTime + "}" + "{" + newToTime + "}"
-				+ line.substring(bracketToIndex + 1);
+		String fixedLine = "{" + newFromTime + "}" + "{" + newToTime + "}" + line.substring(bracketToIndex + 1);
 		return fixedLine;
 	}
 
