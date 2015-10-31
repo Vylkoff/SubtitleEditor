@@ -372,6 +372,8 @@ public class Main1 extends JFrame implements ActionListener {
 
 	private void openFile() {
 		JFileChooser open = new JFileChooser();
+		open.setFileFilter(new FileTypeFilter(".sub",""));
+		open.setFileFilter(new FileTypeFilter(".srt",""));
 		open.showOpenDialog(null);
 		File file = open.getSelectedFile();
 		openingFiles(file);
