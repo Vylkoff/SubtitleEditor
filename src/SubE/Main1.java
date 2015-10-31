@@ -308,44 +308,11 @@ public class Main1 extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 
 		if (event.getSource() == openFile) {
-			JFileChooser open = new JFileChooser();
-			open.showOpenDialog(null);
-			File file = open.getSelectedFile();
-			openingFiles(file);
-
+			openFile();
 		} else if (event.getSource() == saveFile) {
-			JFileChooser save = new JFileChooser();
-			File filename = save.getSelectedFile();
-			if (opened == false && saved == false) {
-				save.showSaveDialog(null);
-				int confirmationResult;
-				if (filename.exists()) {
-					confirmationResult = JOptionPane.showConfirmDialog(
-							saveFile, "Replace existing file?");
-					if (confirmationResult == JOptionPane.YES_OPTION) {
-						saveFile(filename);
-					}
-				} else {
-					saveFile(filename);
-				}
-			} else {
-				quickSave(openedFile);
-			}
+			saveFile();
 		} else if (event.getSource() == saveAsFile) {
-			JFileChooser saveAs = new JFileChooser();
-			saveAs.showSaveDialog(null);
-			File filename = saveAs.getSelectedFile();
-			int confirmationResult;
-			if (filename.exists()) {
-				confirmationResult = JOptionPane.showConfirmDialog(saveAsFile,
-						"Replace existing file?");
-				if (confirmationResult == JOptionPane.YES_OPTION) {
-					saveFile(filename);
-				}
-			} else {
-				saveFile(filename);
-			}
-
+			saveAsFile();
 		} else if (event.getSource() == exit) {
 			System.exit(0);
 		} else if (event.getSource() == selectAll) {
@@ -421,6 +388,49 @@ public class Main1 extends JFrame implements ActionListener {
 			String text = textArea.getText();
 			String fixedSubtitles = text.replaceAll("\\<.*?\\>", "");
 			textArea.setText(fixedSubtitles);
+		}
+	}
+
+	private void openFile() {
+		JFileChooser open = new JFileChooser();
+		open.showOpenDialog(null);
+		File file = open.getSelectedFile();
+		openingFiles(file);
+	}
+
+	private void saveFile() {
+		JFileChooser save = new JFileChooser();
+		File filename = save.getSelectedFile();
+		if (opened == false && saved == false) {
+			save.showSaveDialog(null);
+			int confirmationResult;
+			if (filename.exists()) {
+				confirmationResult = JOptionPane.showConfirmDialog(saveFile,
+						"Replace existing file?");
+				if (confirmationResult == JOptionPane.YES_OPTION) {
+					saveFile(filename);
+				}
+			} else {
+				saveFile(filename);
+			}
+		} else {
+			quickSave(openedFile);
+		}
+	}
+
+	private void saveAsFile() {
+		JFileChooser saveAs = new JFileChooser();
+		saveAs.showSaveDialog(null);
+		File filename = saveAs.getSelectedFile();
+		int confirmationResult;
+		if (filename.exists()) {
+			confirmationResult = JOptionPane.showConfirmDialog(saveAsFile,
+					"Replace existing file?");
+			if (confirmationResult == JOptionPane.YES_OPTION) {
+				saveFile(filename);
+			}
+		} else {
+			saveFile(filename);
 		}
 	}
 
