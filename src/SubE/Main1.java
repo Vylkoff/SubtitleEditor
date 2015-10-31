@@ -17,6 +17,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+import java.util.Scanner;
 
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
@@ -42,18 +45,22 @@ import javax.swing.undo.UndoManager;
 import javax.xml.soap.Text;
 
 public class Main1 extends JFrame implements ActionListener {
-
+	  private static final String OUTPUT_FILE = "fixed.sub";
+	  private static String line;
 	public static void main(String[] args) {
+		  
+	
 		new Main1();
 	}
-//TEST
+
+	//TEST
 	// Menus
 	private JMenu fileMenu;
 	private JMenu editMenu;
 	private JMenuItem openFile, saveFile, saveAsFile, exit;
 	private JMenuItem selectAll, copy, paste, cut;
 	private JRadioButton rb1, rb2;
-	private JTextField tf;
+	private static JTextField tf;
 	private JCheckBox cb;
 	private JButton run;
 
@@ -63,7 +70,7 @@ public class Main1 extends JFrame implements ActionListener {
 	// Text Area
 	private Border textBorder;
 	private JScrollPane scroll;
-	private JTextArea textArea;
+	private static JTextArea textArea;
 	private Font textFont;
 	private Text textContent;
 
@@ -93,6 +100,7 @@ public class Main1 extends JFrame implements ActionListener {
 
 		// Create Window
 		createEditorWindow();
+		
 	}
 
 	private JFrame createEditorWindow() {
@@ -345,29 +353,41 @@ public class Main1 extends JFrame implements ActionListener {
 		} else if (event.getSource() == cut) {
 			textArea.cut();
 
-		} else if ((event.getSource() == rb1) && (event.getSource() == run)) {
-			String line = textArea.getText();
-
-			// Find closing brace
-			int bracketFromIndex = line.indexOf('}');
-			// Extract 'from' time
-			String fromTime = line.substring(1, bracketFromIndex);
-			// Calculate new 'from' time
-			String milisecs = tf.getText();
-			int milsec = Integer.parseInt(milisecs);
-			int newFromTime = Integer.parseInt(fromTime) + milsec;
-			// Find the following closing brace
-			int bracketToIndex = line.indexOf('}', bracketFromIndex + 1);
-			// Extract 'to' time
-			String toTime = line.substring(bracketFromIndex + 2, bracketToIndex);
-			String milisecs1 = tf.getText();
-			int milsec1 = Integer.parseInt(milisecs);
-			// Calculate new 'to' time
-			int newToTime = Integer.parseInt(toTime) + milsec1;
-			// Create a new line using the new 'from' and 'to' times
-			String fixedLine = "{" + newFromTime + "}" + "{" + newToTime + "}" + line.substring(bracketToIndex + 1);
-
-			textArea.setText(fixedLine);
+		} else if  (rb1.isSelected() && (event.getSource() == run)){
+			Scanner fileInput = null;
+	        PrintStream fileOutput = null;
+	        try {
+	         // Create scanner with the Cyrillic encoding
+	        	
+	           fileInput = new Scanner(
+	               new File("proba.txt", "UTF-8"));
+	        	
+	        	
+	            // Create PrintWriter with the Cyrillic encoding
+	            fileOutput = new PrintStream(
+	                "textArea.setText()", "UTF-8");
+	          //  String line;
+	            while (fileInput.hasNextLine()) {
+	                line = fileInput.nextLine();
+	                String fixedLine = fixLine(line);
+	                fileOutput.println(fixedLine);
+	            }
+	        } catch (FileNotFoundException fnfe) {
+	            System.err.println(fnfe.getMessage());
+	        } catch (UnsupportedEncodingException uee) {
+	            System.err.println(uee.getMessage());
+	        } finally {
+	            if (null != fileInput) {
+	               fileInput.close();
+	            }
+	            if (null != fileOutput) {
+	                fileOutput.close();
+	            }
+	        }
+			//fixLine(line);
+			
+			
+			
 		} else if ((event.getSource() == rb2) && (event.getSource() == run)) {
 			String line = textArea.getText();
 			// Find closing brace
@@ -396,6 +416,29 @@ public class Main1 extends JFrame implements ActionListener {
 			textArea.setText(fixedSubtitles);
 		}
 	}
+	private static   String fixLine(String line) {
+		// Find closing brace
+					int bracketFromIndex = line.indexOf('}');
+					// Extract 'from' time
+					String fromTime = line.substring(1, bracketFromIndex);
+					// Calculate new 'from' time
+					String milisecs = tf.getText();
+					int milsec = Integer.parseInt(milisecs);
+					int newFromTime = Integer.parseInt(fromTime) + milsec;
+					
+					// Find the following closing brace
+					int bracketToIndex = line.indexOf('}', bracketFromIndex + 1);
+					// Extract 'to' time
+					String toTime = line.substring(bracketFromIndex + 2, bracketToIndex);
+					String milisecs1 = tf.getText();
+					int milsec1 = Integer.parseInt(milisecs);
+					// Calculate new 'to' time
+					int newToTime = Integer.parseInt(toTime) + milsec1;
+					// Create a new line using the new 'from' and 'to' times
+					String fixedLine = "{" + newFromTime + "}" + "{" + newToTime + "}" + line.substring(bracketToIndex + 1);
+					//textArea.setText(fixedLine);
+					return fixedLine;
+		}
 
 	// GETTERS AND SETTERS
 
