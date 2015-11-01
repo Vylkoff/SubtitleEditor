@@ -44,16 +44,16 @@ import javax.swing.undo.CannotUndoException;
 import javax.swing.undo.UndoManager;
 import javax.xml.soap.Text;
 
-public class Main1 extends JFrame implements ActionListener {
+public class SubtitleEditor extends JFrame implements ActionListener {
 	private static final String OUTPUT_FILE = "fixed.sub";
 	private static String line;
 
 	public static void main(String[] args) {
 
-		new Main1();
+		new SubtitleEditor();
 	}
 
-	// TEST
+	
 	// Menus
 	private JMenu fileMenu;
 	private JMenu editMenu;
@@ -86,7 +86,7 @@ public class Main1 extends JFrame implements ActionListener {
 
 	// CONSTRUCTOR
 
-	public Main1() {
+	public SubtitleEditor() {
 
 		// Create Menus
 		fileMenu();
@@ -246,7 +246,7 @@ public class Main1 extends JFrame implements ActionListener {
 		buttonRun.setEnabled(true);
 	}
 
-	// Method for saving files - Removes duplication of code
+	// Method for saving files 
 	private void saveFile(File filename) {
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
@@ -364,9 +364,7 @@ public class Main1 extends JFrame implements ActionListener {
 
 			// textArea.setText(fixedLine);
 		} else if (event.getSource() == checkBox) {
-			String text = textArea.getText();
-			String fixedSubtitles = text.replaceAll("\\<.*?\\>", "");
-			textArea.setText(fixedSubtitles);
+			deleteTags();
 		}
 	}
 
@@ -457,6 +455,11 @@ public class Main1 extends JFrame implements ActionListener {
 		// Create a new line using the new 'from' and 'to' times
 		String fixedLine = "{" + newFromTime + "}" + "{" + newToTime + "}" + line.substring(bracketToIndex + 1);
 		return fixedLine;
+	}
+	private void deleteTags(){
+		String text = textArea.getText();
+		String fixedSubtitles = text.replaceAll("\\<.*?\\>", "");
+		textArea.setText(fixedSubtitles);
 	}
 
 	// GETTERS AND SETTERS
