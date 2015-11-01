@@ -104,7 +104,7 @@ public class SubtitleEditor extends JFrame implements ActionListener {
 	}
 
 	private JFrame createEditorWindow() {
-		editorWindow = new JFrame("JavaEdit");
+		editorWindow = new JFrame("Subtitles Editor");
 		editorWindow.setVisible(true);
 		editorWindow.setExtendedState(Frame.MAXIMIZED_BOTH);
 		editorWindow.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -277,7 +277,7 @@ public class SubtitleEditor extends JFrame implements ActionListener {
 			FileReader reader = new FileReader(filename);
 			textArea.read(reader, null);
 			opened = true;
-			window.setTitle("JavaEdit - " + filename.getName());
+			editorWindow.setTitle("Subtitles Editor - " + filename.getName());
 		} catch (IOException err) {
 			err.printStackTrace();
 		}
