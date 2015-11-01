@@ -45,15 +45,12 @@ import javax.swing.undo.UndoManager;
 import javax.xml.soap.Text;
 
 public class SubtitleEditor extends JFrame implements ActionListener {
-	private static final String OUTPUT_FILE = "fixed.sub";
-	private static String line;
 
 	public static void main(String[] args) {
 
 		new SubtitleEditor();
 	}
 
-	
 	// Menus
 	private JMenu fileMenu;
 	private JMenu editMenu;
@@ -246,7 +243,7 @@ public class SubtitleEditor extends JFrame implements ActionListener {
 		buttonRun.setEnabled(true);
 	}
 
-	// Method for saving files 
+	// Method for saving files
 	private void saveFile(File filename) {
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
@@ -281,7 +278,7 @@ public class SubtitleEditor extends JFrame implements ActionListener {
 		} catch (IOException err) {
 			err.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
@@ -306,63 +303,40 @@ public class SubtitleEditor extends JFrame implements ActionListener {
 
 		} else if (radioButtonFaster.isSelected() && (event.getSource() == buttonRun)) {
 			Scanner fileInput = null;
-			PrintStream fileOutput = null;
 			try {
 				// Create scanner with the Cyrillic encoding
-
-				fileInput = new Scanner(new File("proba.txt", "UTF-8"));
-
-				// Create PrintWriter with the Cyrillic encoding
-				fileOutput = new PrintStream("OUTPUT_FILE)", "UTF-8");
-				// String line;
+				fileInput = new Scanner(new File("Subtitles.sub", "UTF-8"));
 				while (fileInput.hasNextLine()) {
-					line = fileInput.nextLine();
+					String line = fileInput.nextLine();
 					String fixedLine = fixSubtitleFaster(line);
-					fileOutput.println(fixedLine);
+					textArea.setText(fixedLine);
 				}
 			} catch (FileNotFoundException fnfe) {
 				System.err.println(fnfe.getMessage());
-			} catch (UnsupportedEncodingException uee) {
-				System.err.println(uee.getMessage());
 			} finally {
 				if (null != fileInput) {
 					fileInput.close();
-				}
-				if (null != fileOutput) {
-					fileOutput.close();
 				}
 			}
 
 		} else if (radioButtonSlower.isSelected() && (event.getSource() == buttonRun)) {
 			Scanner fileInput = null;
-			PrintStream fileOutput = null;
 			try {
 				// Create scanner with the Cyrillic encoding
-
 				fileInput = new Scanner(new File("Subtitles.sub", "UTF-8"));
-
-				// Create PrintWriter with the Cyrillic encoding
-				fileOutput = new PrintStream("OUTPUT_FILE", "UTF-8");
-				// String line;
 				while (fileInput.hasNextLine()) {
-					line = fileInput.nextLine();
+					String line = fileInput.nextLine();
 					String fixedLine = fixSubtitleSlower(line);
-					fileOutput.println(fixedLine);
+					textArea.setText(fixedLine);
 				}
 			} catch (FileNotFoundException fnfe) {
 				System.err.println(fnfe.getMessage());
-			} catch (UnsupportedEncodingException uee) {
-				System.err.println(uee.getMessage());
 			} finally {
 				if (null != fileInput) {
 					fileInput.close();
 				}
-				if (null != fileOutput) {
-					fileOutput.close();
-				}
 			}
 
-			// textArea.setText(fixedLine);
 		} else if (event.getSource() == checkBox) {
 			deleteTags();
 		}
@@ -370,8 +344,8 @@ public class SubtitleEditor extends JFrame implements ActionListener {
 
 	private void openFile() {
 		JFileChooser open = new JFileChooser();
-		open.setFileFilter(new FileTypeFilter(".sub",""));
-		open.setFileFilter(new FileTypeFilter(".srt",""));
+		open.setFileFilter(new FileTypeFilter(".sub", ""));
+		open.setFileFilter(new FileTypeFilter(".srt", ""));
 		open.showOpenDialog(null);
 		File file = open.getSelectedFile();
 		openingFiles(file);
@@ -431,7 +405,6 @@ public class SubtitleEditor extends JFrame implements ActionListener {
 		int newToTime = Integer.parseInt(toTime) + milsec1;
 		// Create a new line using the new 'from' and 'to' times
 		String fixedLine = "{" + newFromTime + "}" + "{" + newToTime + "}" + line.substring(bracketToIndex + 1);
-		// textArea.setText(fixedLine);
 		return fixedLine;
 	}
 
@@ -456,7 +429,8 @@ public class SubtitleEditor extends JFrame implements ActionListener {
 		String fixedLine = "{" + newFromTime + "}" + "{" + newToTime + "}" + line.substring(bracketToIndex + 1);
 		return fixedLine;
 	}
-	private void deleteTags(){
+
+	private void deleteTags() {
 		String text = textArea.getText();
 		String fixedSubtitles = text.replaceAll("\\<.*?\\>", "");
 		textArea.setText(fixedSubtitles);
